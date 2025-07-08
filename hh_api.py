@@ -37,15 +37,11 @@ def fetch_vacancies(language):
 
 
 def predict_rub_salary(vacancy):
-    if vacancy['salary'] is None:
-        return None
-    if vacancy['salary']['currency'] != 'RUR':
-        return None
-
-    start = vacancy['salary']['from']
-    end = vacancy['salary']['to']
-
-    return predict_salary_from_range(start, end)
+    if vacancy['salary'] and vacancy['salary']['currency'] == 'RUR':
+        start = vacancy['salary']['from']
+        end = vacancy['salary']['to']
+        return predict_salary_from_range(start, end)
+    return None
 
 
 def calculate_average_salaries(languages):
